@@ -1,6 +1,7 @@
 # 123dsada
 
 ## 1. 로그인 흐름
+
 ```mermaid
 sequenceDiagram
     autonumber
@@ -23,7 +24,12 @@ sequenceDiagram
         AuthAPI-->>Frontend: 401 Unauthorized
         Frontend-->>User: 로그인 실패 메시지 표시
     end
-    sequenceDiagram
+```
+
+## 2. 예약 신청 흐름
+
+```mermaid
+sequenceDiagram
     autonumber
     actor User as 사용자
     participant Frontend as 프론트엔드
@@ -47,6 +53,7 @@ sequenceDiagram
         ReservationAPI->>ReservationAPI: 시간 검증
         ReservationAPI->>DB: 기존 예약 조회
         DB-->>ReservationAPI: 목록 반환
+
         alt 중복 예약 존재
             ReservationAPI-->>Frontend: 409 Conflict
             Frontend-->>User: 중복 안내
@@ -57,7 +64,12 @@ sequenceDiagram
             Frontend-->>User: 신청 완료
         end
     end
-    sequenceDiagram
+```
+
+## 3. 예약 승인 / 거절 흐름
+
+```mermaid
+sequenceDiagram
     autonumber
     actor Admin as 관리자
     participant Frontend as 관리자 화면
@@ -88,3 +100,4 @@ sequenceDiagram
         ReservationAPI-->>Frontend: 완료
         Frontend-->>Admin: 상태 표시
     end
+```
