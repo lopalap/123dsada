@@ -23,9 +23,9 @@ sequenceDiagram
         AuthAPI-->>Frontend: 401 Unauthorized
         Frontend-->>User: 로그인 실패 메시지 표시
     end
-```  <-- 여기서 닫아주어야 합니다!
 
-## 2. 예약 신청 흐름
+
+ ## 2. 예약 신청 흐름
 ```mermaid  <-- 여기서 새로 열어주어야 합니다!
 sequenceDiagram
     autonumber
@@ -64,7 +64,7 @@ sequenceDiagram
             Frontend-->>User: 예약 신청 완료 표시
         end
     end
-``` <-- 여기서 또 닫아주어야 합니다!
+```
 
 ## 3. 관리자 예약 승인/거절 흐름
 ```mermaid  <-- 마지막 다이어그램도 새로 열어주세요!
@@ -99,4 +99,4 @@ sequenceDiagram
         ReservationAPI-->>Frontend: 거절 완료
         Frontend-->>Admin: 거절 상태 표시
     end
-``` <-- 마지막으로 닫아주세요!
+```
