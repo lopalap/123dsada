@@ -23,8 +23,8 @@ sequenceDiagram
         AuthAPI-->>Frontend: 401 Unauthorized
         Frontend-->>User: 로그인 실패 메시지 표시
     end
-2. 예약 신청 흐름
-코드 스니펫
+## 2. 예약 신청 흐름
+```mermaid
 sequenceDiagram
     autonumber
     actor User as 사용자
@@ -62,6 +62,8 @@ sequenceDiagram
             Frontend-->>User: 예약 신청 완료 표시
         end
     end
+
+---
 3. 관리자 예약 승인/거절 흐름
 코드 스니펫
 sequenceDiagram
