@@ -24,7 +24,7 @@ sequenceDiagram
         Frontend-->>User: 로그인 실패 메시지 표시
     end
 ## 2. 예약 신청 흐름
-```mermaid  <-- 여기서 새로 열어주어야 합니다!
+```mermaid  
 sequenceDiagram
     autonumber
     actor User as 사용자
