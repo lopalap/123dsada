@@ -23,8 +23,10 @@ sequenceDiagram
         AuthAPI-->>Frontend: 401 Unauthorized
         Frontend-->>User: 로그인 실패 메시지 표시
     end
-## 2. 예약 신청 흐름
-```mermaid  
+
+
+    2. 예약 신청 흐름
+코드 스니펫
 sequenceDiagram
     autonumber
     actor User as 사용자
@@ -62,4 +64,37 @@ sequenceDiagram
             Frontend-->>User: 예약 신청 완료 표시
         end
     end
-```
+
+    3. 관리자 예약 승인/거절 흐름
+코드 스니펫
+sequenceDiagram
+    autonumber
+    actor Admin as 관리자
+    participant Frontend as 관리자 화면
+    participant ReservationAPI as 예약 API<br/>/api/reservations
+    participant DB as DB
+
+    Admin->>Frontend: 예약 목록 조회
+    Frontend->>ReservationAPI: GET /api/reservations<br/>Bearer accessToken
+    ReservationAPI->>DB: 관리자 권한 확인
+    DB-->>ReservationAPI: 관리자 정보 반환
+    ReservationAPI->>DB: 전체 예약 목록 조회
+    DB-->>ReservationAPI: 예약 목록 반환
+    ReservationAPI-->>Frontend: 200 OK<br/>예약 목록
+    Frontend-->>Admin: 예약 목록 표시
+
+    alt 승인
+        Admin->>Frontend: 예약 승인 클릭
+        Frontend->>ReservationAPI: PATCH /api/reservations/:id/approve
+        ReservationAPI->>DB: status = reserved<br/>approved_by 저장
+        DB-->>ReservationAPI: 수정된 예약 반환
+        ReservationAPI-->>Frontend: 승인 완료
+        Frontend-->>Admin: 승인 상태 표시
+    else 거절
+        Admin->>Frontend: 예약 거절 클릭
+        Frontend->>ReservationAPI: PATCH /api/reservations/:id/reject
+        ReservationAPI->>DB: status = cancelled<br/>cancel_reason 저장
+        DB-->>ReservationAPI: 수정된 예약 반환
+        ReservationAPI-->>Frontend: 거절 완료
+        Frontend-->>Admin: 거절 상태 표시
+    end
