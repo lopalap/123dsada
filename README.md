@@ -1,64 +1,65 @@
-from pathlib import Path
+```mermaid
+classDiagram
+    class User {
+        +ObjectId _id
+        +String name
+        +String email
+        +String role
+        +login() Boolean
+        +logout() void
+        +updateProfile() void
+    }
+    class Knowledge {
+        +ObjectId _id
+        +String title
+        +String content
+        +ObjectId category
+        +ObjectId created_by
+        +Date created_at
+        +Date updated_at
+        +create() void
+        +update() void
+        +delete() void
+    }
+    class Category {
+        +ObjectId _id
+        +String name
+        +String description
+        +ObjectId parent_id
+        +Date created_at
+        +create() void
+        +update() void
+        +delete() void
+    }
+    class Notice {
+        +ObjectId _id
+        +String title
+        +String content
+        +Date created_at
+        +create() void
+        +update() void
+        +delete() void
+    }
+    class Issue {
+        +ObjectId _id
+        +String title
+        +String content
+        +String status
+        +ObjectId created_by
+        +ObjectId resolved_by
+        +Date created_at
+        +Date resolved_at
+        +create() void
+        +update() void
+        +resolve() void
+    }
 
-xml = r'''<mxfile host="app.diagrams.net">
-  <diagram name="CloudVLab-ClassDiagram">
-    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1">
-      <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
-
-        <mxCell id="user" value="&lt;b&gt;User&lt;/b&gt;&lt;hr/&gt;id : ObjectId&lt;br/&gt;name : String&lt;br/&gt;email : String&lt;br/&gt;role : String"
-          style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="40" y="180" width="180" height="140" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="knowledge" value="&lt;b&gt;Knowledge&lt;/b&gt;&lt;hr/&gt;id : ObjectId&lt;br/&gt;title : String&lt;br/&gt;content : String&lt;br/&gt;createdAt : Date"
-          style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="320" y="180" width="220" height="160" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="category" value="&lt;b&gt;Category&lt;/b&gt;&lt;hr/&gt;id : ObjectId&lt;br/&gt;name : String&lt;br/&gt;description : String"
-          style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="680" y="120" width="200" height="130" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="notice" value="&lt;b&gt;Notice&lt;/b&gt;&lt;hr/&gt;id : ObjectId&lt;br/&gt;title : String&lt;br/&gt;content : String&lt;br/&gt;createdAt : Date"
-          style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="680" y="320" width="200" height="150" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="issue" value="&lt;b&gt;Issue&lt;/b&gt;&lt;hr/&gt;id : ObjectId&lt;br/&gt;title : String&lt;br/&gt;content : String&lt;br/&gt;status : String"
-          style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="320" y="420" width="220" height="150" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="e1" value="creates" edge="1" parent="1" source="user" target="knowledge">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="e2" value="belongs to" edge="1" parent="1" source="knowledge" target="category">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="e3" value="creates" edge="1" parent="1" source="user" target="notice">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="e4" value="creates" edge="1" parent="1" source="user" target="issue">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="e5" value="resolves" edge="1" parent="1" source="user" target="issue">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-</mxfile>'''
-
-path = "/mnt/data/CloudVLab_ClassDiagram.drawio"
-Path(path).write_text(xml, encoding="utf-8")
-print(path)
+    User "1" --> "0..*" Knowledge : creates
+    User "1" --> "0..*" Issue : creates
+    User "0..1" ..> "0..*" Issue : resolves
+    Knowledge "0..*" --> "1" Category : belongs to
+    Category --> Category : parent
+```
 
 
 
