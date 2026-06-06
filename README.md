@@ -1,57 +1,65 @@
-@startuml
-title Cloud V-Lab Center - Class Diagram
+from pathlib import Path
 
-skinparam classAttributeIconSize 0
-skinparam shadowing false
+xml = r'''<mxfile host="app.diagrams.net">
+  <diagram name="CloudVLab-ClassDiagram">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
 
-left to right direction
+        <mxCell id="user" value="&lt;b&gt;User&lt;/b&gt;&lt;hr/&gt;id : ObjectId&lt;br/&gt;name : String&lt;br/&gt;email : String&lt;br/&gt;role : String"
+          style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="180" width="180" height="140" as="geometry"/>
+        </mxCell>
 
-class User {
-- id : ObjectId
-- name : String
-- email : String
-- role : String
-}
+        <mxCell id="knowledge" value="&lt;b&gt;Knowledge&lt;/b&gt;&lt;hr/&gt;id : ObjectId&lt;br/&gt;title : String&lt;br/&gt;content : String&lt;br/&gt;createdAt : Date"
+          style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="180" width="220" height="160" as="geometry"/>
+        </mxCell>
 
-class Knowledge {
-- id : ObjectId
-- title : String
-- content : String
-- createdAt : Date
-}
+        <mxCell id="category" value="&lt;b&gt;Category&lt;/b&gt;&lt;hr/&gt;id : ObjectId&lt;br/&gt;name : String&lt;br/&gt;description : String"
+          style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="120" width="200" height="130" as="geometry"/>
+        </mxCell>
 
-class Category {
-- id : ObjectId
-- name : String
-- description : String
-}
+        <mxCell id="notice" value="&lt;b&gt;Notice&lt;/b&gt;&lt;hr/&gt;id : ObjectId&lt;br/&gt;title : String&lt;br/&gt;content : String&lt;br/&gt;createdAt : Date"
+          style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="320" width="200" height="150" as="geometry"/>
+        </mxCell>
 
-class Notice {
-- id : ObjectId
-- title : String
-- content : String
-- createdAt : Date
-}
+        <mxCell id="issue" value="&lt;b&gt;Issue&lt;/b&gt;&lt;hr/&gt;id : ObjectId&lt;br/&gt;title : String&lt;br/&gt;content : String&lt;br/&gt;status : String"
+          style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="420" width="220" height="150" as="geometry"/>
+        </mxCell>
 
-class Issue {
-- id : ObjectId
-- title : String
-- content : String
-- status : String
-}
+        <mxCell id="e1" value="creates" edge="1" parent="1" source="user" target="knowledge">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
 
-User "1" --> "0..*" Knowledge : creates
-Knowledge "0..*" --> "1" Category : belongs to
-Category "0..*" --> "0..1" Category : parent
+        <mxCell id="e2" value="belongs to" edge="1" parent="1" source="knowledge" target="category">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
 
-User "1" --> "0..*" Notice : creates
-User "1" --> "0..*" Issue : creates
-User "0..1" --> "0..*" Issue : resolves
+        <mxCell id="e3" value="creates" edge="1" parent="1" source="user" target="notice">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
 
-Notice -[hidden]- Category
-Issue -[hidden]- Knowledge
+        <mxCell id="e4" value="creates" edge="1" parent="1" source="user" target="issue">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
 
-@enduml
+        <mxCell id="e5" value="resolves" edge="1" parent="1" source="user" target="issue">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>'''
+
+path = "/mnt/data/CloudVLab_ClassDiagram.drawio"
+Path(path).write_text(xml, encoding="utf-8")
+print(path)
+
 
 
 # 시퀀스 다이어그램 모음
