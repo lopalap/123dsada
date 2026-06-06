@@ -1,3 +1,59 @@
+@startuml
+title Cloud V-Lab Center - Class Diagram
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+left to right direction
+
+class User {
+- id : ObjectId
+- name : String
+- email : String
+- role : String
+}
+
+class Knowledge {
+- id : ObjectId
+- title : String
+- content : String
+- createdAt : Date
+}
+
+class Category {
+- id : ObjectId
+- name : String
+- description : String
+}
+
+class Notice {
+- id : ObjectId
+- title : String
+- content : String
+- createdAt : Date
+}
+
+class Issue {
+- id : ObjectId
+- title : String
+- content : String
+- status : String
+}
+
+User "1" --> "0..*" Knowledge : creates
+Knowledge "0..*" --> "1" Category : belongs to
+Category "0..*" --> "0..1" Category : parent
+
+User "1" --> "0..*" Notice : creates
+User "1" --> "0..*" Issue : creates
+User "0..1" --> "0..*" Issue : resolves
+
+Notice -[hidden]- Category
+Issue -[hidden]- Knowledge
+
+@enduml
+
+
 # 시퀀스 다이어그램 모음
 
 ## 목차
